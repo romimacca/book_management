@@ -1,0 +1,18 @@
+$("#boton").text("")
+
+<% if @type == 'ver' %>
+    $("#modalBookLabel").text("<%= @book.title.html_safe %>")
+    $("#modalBody").html("<b>Author: <%= @book.author %></b><br><p> <%= @book.review %><p>")
+
+<% elsif @type == 'reservar' %>
+    $("#modalBookLabel").text("Reservar :: <%= @book.title.html_safe %>")
+    $("#modalBody").text("Estas seguro que quieres reservar <%= @book.title.html_safe %>")
+    btn = '<%= link_to "Confirm reserve", reserve_book_path(@book), remote: true, method: :post,data: {disable_with: "Request processing..."}, class: "btn btn-info" %>'
+    $("#boton").html(btn)
+
+<% elsif @type == 'pagar' %>
+    $("#modalBookLabel").text("Pagar :: <%= @book.title.html_safe %>")
+
+<% end %>
+
+$("#modalBook").modal('show')

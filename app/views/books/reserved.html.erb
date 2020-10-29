@@ -1,0 +1,40 @@
+<h1>My Reserved Books</h1>
+
+<% if @books.any? %>
+    <div id="books_list" class="row">
+        <%= render @books %>
+    </div>
+<% else %>
+    <div class="alert alert-secondary" role="alert">
+        You haven't reserved any books yet, go to
+        <%= link_to "Available Books to reserve", books_available_path, class: "alert-link" %>
+        or 
+        <%= link_to "My Books", books_bought_path , class: "alert-link" %>
+    </div>
+<% end %>
+
+<!-- Modal PAGO -->
+<div class="modal fade" id="payBookModal" tabindex="-1" aria-labelledby="payBookLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="payBookLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+
+        <div id="modalBody" class="modal-body">
+        <%= form_tag( pay_book_path, method: "post", remote: true ) do%>
+            <%= select('book', 'book_id', @books.collect {|b| [b.title, b.id]}, {:include_blank => false}, {class: 'form-control'} )%>
+            <br>
+            <%= submit_tag "Bought", class: "btn btn-success"%>
+        <% end %>
+        
+        </div>
+        <div class="modal-footer">
+        
+        </div>
+    </div>
+    </div>
+</div>

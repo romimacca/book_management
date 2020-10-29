@@ -1,0 +1,14 @@
+<h1>My Books</h1>
+
+    <div id="books_list" class="row">
+    <% if @books.any? %>
+        <%= render @books %>
+    <% else %>
+        <div class="alert alert-secondary" role="alert">
+            You haven't bougth any books
+            <%= link_to "My Reserved Books to bought", books_reserved_path , class: "alert-link" %>
+            or 
+            <%= link_to "Available Books to reserve", books_available_path, class: "alert-link" %>
+        </div>
+    <% end %>
+    </div>
